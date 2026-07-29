@@ -1,0 +1,170 @@
+/* 作成タブ — テンプレートカード（タグUIは style.css の intent-* を利用） */
+
+.create-page .result-count {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.create-page .intent-selected-summary.has-selection {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.create-page .empty-state {
+  background: var(--bg-muted);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 28px 18px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.create-page .template-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  margin-top: 14px;
+}
+
+.create-page .template-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  color: var(--text-heading);
+}
+
+.create-page .template-purpose {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.create-page .match-hint {
+  margin: -4px 0 10px;
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.create-page .intent-conflict {
+  margin-bottom: 14px;
+}
+
+.create-page .intent-error-hint-title {
+  margin: 14px 0 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.create-page #intentError[hidden] {
+  display: none !important;
+}
+
+.create-page .template-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.create-page .mini-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.create-page .sql-box {
+  background: var(--bg-code);
+  border-radius: 10px;
+  border: 1px solid var(--border-code);
+  overflow: hidden;
+}
+
+.create-page .sql-box-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--code-header);
+}
+
+.create-page .copy-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.create-page .copy-btn:hover {
+  background: var(--copy-hover);
+  color: var(--accent);
+}
+
+.create-page .copy-btn.is-ok {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.create-page .sql-box pre {
+  margin: 0;
+  padding: 4px 14px 14px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: Consolas, "Courier New", Monaco, monospace;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--code-text);
+}
+
+.create-page .sql-box .kw {
+  color: var(--kw);
+  font-weight: 700;
+}
+
+.create-page .sql-box .ph {
+  color: var(--point-border);
+  background: var(--bg-point);
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+.create-page .sql-box .str {
+  color: var(--str);
+}
+
+.create-page .notes {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 8px 8px 0;
+}
+
+.create-page .notes h4 {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+}
+
+.create-page .notes ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.create-page .notes li {
+  font-size: 0.85rem;
+}

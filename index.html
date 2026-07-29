@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>たまたにのPostgreSQLメモ</title>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("pg-memo-theme");
+        var dark = saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/builder.css">
+</head>
+<body class="mode-create">
+
+  <header>
+    <div class="header-inner">
+      <h1 class="site-title">たまたにのPostgreSQLメモ</h1>
+
+      <div class="header-right">
+        <nav class="mode-nav" aria-label="表示切替">
+          <button type="button" class="mode-btn is-active" data-mode="create">補助</button>
+          <button type="button" class="mode-btn" data-mode="lessons">講義</button>
+        </nav>
+
+        <input
+          type="search"
+          id="searchInput"
+          class="search-box"
+          placeholder="講義を検索（例：JOIN、RETURNING）"
+          autocomplete="off"
+          tabindex="-1"
+          aria-hidden="true"
+        >
+
+        <button type="button" id="themeToggle" class="theme-toggle" aria-label="テーマ切替" title="テーマ切替">
+          <span class="theme-icon theme-icon-moon"></span>
+          <span class="theme-icon theme-icon-sun"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mode-stage">
+    <!-- ===== 作成 ===== -->
+    <div id="mode-create" class="intent-page create-page mode-view is-active" aria-hidden="false">
+      <div class="intent-inner">
+        <section class="intent-ask-panel">
+          <label class="intent-label" for="intentAsk">やりたいことを書く（任意）</label>
+          <div class="intent-ask-row">
+            <input
+              type="search"
+              id="intentAsk"
+              class="intent-ask-input"
+              placeholder="例：部署ごとの売上合計を取得したい"
+              autocomplete="off"
+            >
+            <button type="button" id="intentClear" class="intent-clear-btn">クリア</button>
+          </div>
+          <div id="intentExamples" class="intent-examples"></div>
+        </section>
+
+        <section class="intent-tag-panel">
+          <div class="intent-panel-head">
+            <h2>タグを選ぶ</h2>
+            <p id="intentSelectedSummary" class="intent-selected-summary">タグ未選択 — 選んで「検索」を押してください</p>
+          </div>
+          <div id="intentGroups"></div>
+          <div class="intent-search-row">
+            <button type="button" id="intentSearch" class="intent-search-btn">検索</button>
+            <p class="intent-search-hint">タグを1つ足すとその句が付きます。結果は常に完全一致のSQLが1件です。</p>
+          </div>
+        </section>
+
+        <section class="intent-result-panel">
+          <div class="intent-panel-head">
+            <h2>使えるテンプレート</h2>
+            <p class="result-count" id="resultCount"></p>
+          </div>
+          <div id="intentError" class="intent-conflict" hidden></div>
+          <div id="emptyState" class="empty-state">
+            タグを選んで「検索」ボタンを押してください。
+          </div>
+          <div id="templateList" class="template-list"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ===== 講義 ===== -->
+    <div id="mode-lessons" class="mode-view" aria-hidden="true">
+      <div class="layout">
+        <aside>
+          <nav>
+            <p class="toc-heading">目次 <span id="lessonCount" class="lesson-count"></span></p>
+            <ul id="toc"></ul>
+          </nav>
+        </aside>
+
+        <main>
+          <div id="noResults" class="no-results">該当する講義がありません。</div>
+          <div id="lessons"></div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>たまたにのPostgreSQLメモ</p>
+  </footer>
+
+  <script src="js/lessons.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/intent-tags.js"></script>
+  <script src="js/exact-sql.js"></script>
+  <script src="js/sql-builder.js"></script>
+  <script src="js/mode.js"></script>
+</body>
+</html>
