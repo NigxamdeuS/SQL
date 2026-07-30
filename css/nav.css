@@ -1,0 +1,344 @@
+﻿/*========= ナビゲーション（メニュー・ハンバーガー・項目アニメ） =========*/
+
+/*========= 繝翫ン繧ｲ繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ縺溘ａ縺ｮCSS ===============*/
+
+/*繧｢繧ｯ繝・ぅ繝悶↓縺ｪ縺｣縺溘お繝ｪ繧｢*/
+#g-nav.panelactive {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+/*荳ｸ縺ｮ諡｡螟ｧ*/
+.circle-bg {
+  position: fixed;
+  z-index: 3;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  transform: scale(0);
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  transition: all 0.6s;
+  pointer-events: none;
+}
+
+/* 繝繝ｼ繧ｯ・夂區繝｡繝九Η繝ｼ縺ｮ蜿崎ｻ｢・磯ｻ定レ譎ｯ・・*/
+[data-theme="dark"] .circle-bg {
+  background: #000000;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.circle-bg.circleactive {
+  transform: scale(50);
+}
+
+/*繝翫ン繧ｲ繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ邵ｦ繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ*/
+#g-nav-list {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#g-nav.panelactive #g-nav-list {
+  display: block;
+}
+
+/*繝翫ン繧ｲ繝ｼ繧ｷ繝ｧ繝ｳ*/
+#g-nav ul {
+  opacity: 0;
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 8px 0;
+  width: min(92vw, 380px);
+}
+
+/*閭梧勹縺悟・迴ｾ蠕後↓繝翫ン繧ｲ繝ｼ繧ｷ繝ｧ繝ｳ繧定｡ｨ遉ｺ*/
+#g-nav.panelactive ul {
+  opacity: 1;
+}
+
+#g-nav.panelactive ul::before {
+  content: "MENU";
+  display: block;
+  text-align: center;
+  font-family: "Outfit", "Noto Sans JP", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #8e8e8e;
+  margin-bottom: 10px;
+}
+
+[data-theme="dark"] #g-nav.panelactive ul::before {
+  color: #8e8e8e;
+}
+
+/*閭梧勹縺悟・迴ｾ蠕後↓繝翫ン繧ｲ繝ｼ繧ｷ繝ｧ繝ｳ li 繧定｡ｨ遉ｺ*/
+#g-nav.panelactive ul li {
+  animation-name: gnaviAnime;
+  animation-duration: 0.7s;
+  animation-delay: 0.15s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes gnaviAnime {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*繝ｪ繧ｹ繝医・繝ｬ繧､繧｢繧ｦ繝郁ｨｭ螳・/
+#g-nav li {
+  text-align: center;
+  list-style: none;
+}
+
+#g-nav li + li {
+  border-top: 1px solid transparent;
+  margin-top: 8px;
+}
+
+[data-theme="dark"] #g-nav li + li {
+  border-top-color: transparent;
+}
+
+/* 7-1-8 縺ｫ莉ｻ縺帙ｋ縺溘ａ縲∵立繝帙ヰ繝ｼ閭梧勹縺ｯ辟｡蜉ｹ蛹・*/
+#g-nav li a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#g-nav li a:hover,
+#g-nav li a.is-active {
+  background: transparent;
+}
+
+/* 繝倥ャ繝繝ｼ蜿ｳ蛛ｴ縺ｨ繝懊ち繝ｳ縺碁㍾縺ｪ繧峨↑縺・ｈ縺・↓菴咏區 */
+.header-right {
+  margin-right: 56px;
+}
+/*==================================================
+縲5-2-7 3譛ｬ邱壹′螂･陦後″繧呈戟縺｣縺ｦ蝗櫁ｻ｢縺励※ﾃ励↓
+===================================*/
+
+/*繝懊ち繝ｳ螟門・窶ｻ繝ｬ繧､繧｢繧ｦ繝医↓繧医▲縺ｦposition繧・ｽ｢迥ｶ縺ｯ驕ｩ螳懷､画峩縺励※縺上□縺輔＞*/
+.openbtn{
+	/*繝懊ち繝ｳ蜀・・縺ｮ蝓ｺ轤ｹ縺ｨ縺ｪ繧九◆繧〉elative繧呈欠螳壹・
+霑ｽ蠕薙☆繧九リ繝薙ご繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ蝣ｴ蜷医・fixed・逆op縲〉ight縺ｨ縺・▲縺滉ｽ咲ｽｮ繧偵そ繝・ヨ縺ｧ謖・ｮ・/
+	position: fixed;
+	top: 14px;
+	right: 14px;
+	z-index: 9999;
+	background: #ffffff;
+	border: 1px solid #dbdbdb;
+	cursor: pointer;
+    width: 50px;
+    height:50px;
+	border-radius: 8px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.openbtn:hover {
+	background: #fafafa;
+	border-color: #cfcfcf;
+}
+
+/* 繝繝ｼ繧ｯ・夐ｻ貞渚霆｢繝懊ち繝ｳ */
+[data-theme="dark"] .openbtn {
+	background: #000000;
+	border-color: #333333;
+	box-shadow: none;
+}
+
+[data-theme="dark"] .openbtn:hover {
+	background: #111111;
+	border-color: #444444;
+}
+
+[data-theme="dark"] .openbtn.active {
+	background: #000000;
+	border-color: #333333;
+}
+
+.openbtn span{
+    display: inline-block;
+    transition: all .4s;
+    position: absolute;
+    left: 13px;
+    height: 1.5px;
+    border-radius: 1px;
+	background: #262626;
+  	width: 48%;
+}
+
+[data-theme="dark"] .openbtn span {
+	background: #f5f5f5;
+}
+
+.openbtn span:nth-of-type(1) {
+	top: 17px;
+}
+
+.openbtn span:nth-of-type(2) {
+	top: 24px;
+}
+
+.openbtn span:nth-of-type(3) {
+	top: 31px;
+}
+
+.theme-toggle {
+	border-radius: 8px;
+}
+
+html:not([data-theme="dark"]) .theme-toggle {
+	background: #ffffff;
+	border-color: #dbdbdb;
+}
+
+html:not([data-theme="dark"]) .theme-toggle:hover {
+	background: #fafafa;
+	border-color: #cfcfcf;
+}
+
+[data-theme="dark"] .theme-toggle {
+	background: #000000;
+	border-color: #333333;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+	background: #111111;
+	border-color: #444444;
+}
+
+/*繝懊ち繝ｳ蜀・・*/
+
+.openbtn .openbtn-area{
+    transition: all .4s;
+}
+
+/*active繧ｯ繝ｩ繧ｹ縺御ｻ倅ｸ弱＆繧後ｋ縺ｨ
+邱壹→蜻ｨ繧翫・繧ｨ繝ｪ繧｢縺悟屓霆｢縺励※ﾃ励↓縺ｪ繧・/
+
+.openbtn.active .openbtn-area{
+	transform: rotateY(-360deg);
+}
+
+.openbtn.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-135deg);
+    width: 30%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+	opacity: 0;
+}
+
+.openbtn.active span:nth-of-type(3){
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(135deg);
+    width: 30%;
+}
+/*==================================================
+縲7-1-8 閭梧勹縺梧ｵ√ｌ繧具ｼ域万繧・ｼ俄ｻ繝上Φ繝舌・繧ｬ繝ｼ繝｡繝九Η繝ｼ鬆・岼逕ｨ
+===================================*/
+
+/*== 繝懊ち繝ｳ蜈ｱ騾夊ｨｭ螳・*/
+#g-nav li a.btn {
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  border-radius: 0;
+  padding: 14px 30px;
+  text-align: center;
+  outline: none;
+  background: transparent;
+  font-weight: 500;
+  font-size: 1.02rem;
+  font-family: "Noto Sans JP", sans-serif;
+  letter-spacing: 0.02em;
+  transition: ease 0.2s;
+}
+
+/* 繝懊ち繝ｳ蜀・span 縺ｮ蠖｢迥ｶ */
+#g-nav li a.btn span {
+  position: relative;
+  z-index: 3;
+  color: #333;
+}
+
+#g-nav li a.btn:hover span {
+  color: #fff;
+}
+
+/* 驕ｸ謚樔ｸｭ縺ｯ蜿崎ｻ｢縺帙★縲∝ｭ励ｒ蟆代＠螟ｪ縺上☆繧九□縺・*/
+#g-nav li a.btn.is-active {
+  font-weight: 700;
+}
+
+/*== 閭梧勹縺梧ｵ√ｌ繧具ｼ域万繧・ｼ・*/
+#g-nav li a.bgskew::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  background: #333;
+  width: 120%;
+  height: 100%;
+  transform: skewX(-25deg);
+  z-index: 1;
+}
+
+/* hover 譎ゅ・縺ｿ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ */
+#g-nav li a.bgskew:hover::before {
+  animation: skewanime 0.5s forwards;
+}
+
+@keyframes skewanime {
+  100% {
+    left: -10%;
+  }
+}
+
+/* ----- 繝繝ｼ繧ｯ・壼渚霆｢濶ｲ ----- */
+[data-theme="dark"] #g-nav li a.btn {
+  border-color: #555;
+}
+
+[data-theme="dark"] #g-nav li a.btn span {
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] #g-nav li a.btn:hover span {
+  color: #111;
+}
+
+[data-theme="dark"] #g-nav li a.bgskew::before {
+  background: #f5f5f5;
+}

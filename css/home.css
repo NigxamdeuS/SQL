@@ -1,0 +1,218 @@
+﻿/*========= ホーム（パーティクル文字・月・波・紙吹雪） =========*/
+
+/*==================================================
+縲5-17 繝代・繝・ぅ繧ｯ繝ｫ繝・く繧ｹ繝茨ｼ医・繝ｼ繝・・
+===================================*/
+
+#wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 68px);
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 38%, var(--home-glow), transparent 70%),
+    var(--home-bg);
+  overflow: hidden;
+  transition: background 0.45s ease;
+}
+
+/* 繝ｩ繧､繝茨ｼ夂ｴ吝聖髮ｪ縺瑚ｦ九∴繧九ｈ縺・・繝ｼ繝閭梧勹縺ｯ騾乗・・・-8.css蛛ｴ縺ｧ繧よ欠螳夲ｼ・*/
+html:not([data-theme="dark"]) #wrapper {
+  background: transparent;
+}
+
+/* 繝繝ｼ繧ｯ・壼承蛛ｴ縺ｮ譛亥､・*/
+[data-theme="dark"] #wrapper {
+  background:
+    radial-gradient(ellipse 50% 65% at 92% 36%, rgba(170, 190, 255, 0.22), transparent 60%),
+    radial-gradient(ellipse 35% 45% at 82% 52%, rgba(120, 140, 220, 0.12), transparent 70%),
+    radial-gradient(ellipse 70% 50% at 50% 38%, var(--home-glow), transparent 70%),
+    linear-gradient(255deg, var(--home-bg) 0%, var(--home-bg) 55%, #0a1020 100%);
+}
+
+/* ---------- 譛茨ｼ医ム繝ｼ繧ｯ縺ｮ縺ｿ・・---------- */
+
+.sky-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sky-moon {
+  position: absolute;
+  top: 14%;
+  right: clamp(12px, 4.5vw, 56px);
+  width: min(22vw, 168px);
+  height: min(22vw, 168px);
+  border-radius: 50%;
+  will-change: transform, opacity;
+  opacity: 0;
+  transform: translateY(26vh) scale(0.85);
+  background:
+    radial-gradient(circle at 32% 30%,
+      #ffffff 0%,
+      #eef2ff 28%,
+      #c9d2ea 62%,
+      #9aa6c4 100%);
+  box-shadow:
+    0 0 40px 14px rgba(190, 205, 255, 0.35),
+    0 0 90px 36px rgba(140, 160, 230, 0.18),
+    inset -14px -8px 28px rgba(60, 70, 110, 0.18);
+  display: none;
+}
+
+.sky-moon::before {
+  content: "";
+  position: absolute;
+  width: 18%;
+  height: 18%;
+  left: 28%;
+  top: 38%;
+  border-radius: 50%;
+  background: rgba(150, 160, 190, 0.28);
+  box-shadow:
+    28px -18px 0 -2px rgba(140, 150, 180, 0.22),
+    42px 16px 0 -4px rgba(130, 140, 170, 0.2);
+}
+
+html:not([data-theme="dark"]) .wave {
+  display: none;
+}
+
+[data-theme="dark"] .sky-moon {
+  display: block;
+  animation: sky-rise 2.8s cubic-bezier(0.22, 0.7, 0.25, 1) 0.2s forwards;
+}
+
+@keyframes sky-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(26vh) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-moon {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+#particle {
+  width: 100%;
+  height: calc(100vh - 68px);
+  vertical-align: bottom;
+  position: relative;
+  z-index: 1;
+}
+
+.home-caption {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + min(18vw, 120px));
+  transform: translateX(-50%);
+  z-index: 2;
+  margin: 0;
+  padding: 0 20px;
+  max-width: 90vw;
+  text-align: center;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+#mode-home {
+  padding: 0;
+}
+
+body.mode-home footer {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  #wrapper {
+    min-height: calc(100vh - 60px);
+  }
+  #particle {
+    height: calc(100vh - 60px);
+  }
+  .home-caption {
+    top: calc(50% + 72px);
+    letter-spacing: 0.08em;
+  }
+  .sky-moon {
+    width: min(28vw, 120px);
+    height: min(28vw, 120px);
+    top: 18%;
+  }
+}
+/*==================================================
+縲5-11 豕｢繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ
+===================================*/
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0.92;
+}
+
+#waveCanvas {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: block;
+}
+/*==================================================
+縲5-8 邏吝聖髮ｪ・・articles.js・俄ｻ繝ｩ繧､繝茨ｼ九ヨ繝・・縺ｮ縺ｿ
+===================================*/
+
+#particles-js {
+  display: none;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f3f3f3;
+  pointer-events: none;
+}
+
+/* 繝ｩ繧､繝医°縺､繝医ャ繝励・縺ｿ陦ｨ遉ｺ */
+html:not([data-theme="dark"]) body.mode-home #particles-js {
+  display: block;
+}
+
+/* 繧ｳ繝ｳ繝・Φ繝・ｒ邏吝聖髮ｪ繧医ｊ蜑埼擇縺ｫ */
+#container {
+  position: relative;
+  z-index: 1;
+}
+
+/* 繝医ャ繝励・縺ｿ閭梧勹繧帝上°縺励※邏吝聖髮ｪ繧定ｦ九○繧・*/
+html:not([data-theme="dark"]) body.mode-home {
+  background: transparent;
+}
+
+html:not([data-theme="dark"]) body.mode-home #wrapper {
+  background: transparent;
+}

@@ -1,0 +1,35 @@
+/*==================================================
+　5-8 紙吹雪（particles.js）※ライト＋トップのみ
+===================================*/
+
+#particles-js {
+  display: none;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f3f3f3;
+  pointer-events: none;
+}
+
+/* ライトかつトップのみ表示 */
+html:not([data-theme="dark"]) body.mode-home #particles-js {
+  display: block;
+}
+
+/* コンテンツを紙吹雪より前面に */
+#container {
+  position: relative;
+  z-index: 1;
+}
+
+/* トップのみ背景を透かして紙吹雪を見せる */
+html:not([data-theme="dark"]) body.mode-home {
+  background: transparent;
+}
+
+html:not([data-theme="dark"]) body.mode-home #wrapper {
+  background: transparent;
+}

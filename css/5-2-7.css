@@ -1,0 +1,126 @@
+/*==================================================
+　5-2-7 3本線が奥行きを持って回転して×に
+===================================*/
+
+/*ボタン外側※レイアウトによってpositionや形状は適宜変更してください*/
+.openbtn{
+	/*ボタン内側の基点となるためrelativeを指定。
+追従するナビゲーションの場合はfixed＋top、rightといった位置をセットで指定*/
+	position: fixed;
+	top: 14px;
+	right: 14px;
+	z-index: 9999;
+	background: #ffffff;
+	border: 1px solid #dbdbdb;
+	cursor: pointer;
+    width: 40px;
+    height: 40px;
+	box-sizing: border-box;
+	border-radius: 8px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.openbtn:hover {
+	background: #fafafa;
+	border-color: #cfcfcf;
+}
+
+/* ダーク：黒反転ボタン */
+[data-theme="dark"] .openbtn {
+	background: #000000;
+	border-color: #333333;
+	box-shadow: none;
+}
+
+[data-theme="dark"] .openbtn:hover {
+	background: #111111;
+	border-color: #444444;
+}
+
+[data-theme="dark"] .openbtn.active {
+	background: #000000;
+	border-color: #333333;
+}
+
+.openbtn span{
+    display: inline-block;
+    transition: all .4s;
+    position: absolute;
+    left: 10px;
+    height: 1.5px;
+    border-radius: 1px;
+	background: #262626;
+  	width: 48%;
+}
+
+[data-theme="dark"] .openbtn span {
+	background: #f5f5f5;
+}
+
+.openbtn span:nth-of-type(1) {
+	top: 13px;
+}
+
+.openbtn span:nth-of-type(2) {
+	top: 19px;
+}
+
+.openbtn span:nth-of-type(3) {
+	top: 25px;
+}
+
+.theme-toggle {
+	border-radius: 8px;
+}
+
+html:not([data-theme="dark"]) .theme-toggle {
+	background: #ffffff;
+	border-color: #dbdbdb;
+}
+
+html:not([data-theme="dark"]) .theme-toggle:hover {
+	background: #fafafa;
+	border-color: #cfcfcf;
+}
+
+[data-theme="dark"] .theme-toggle {
+	background: #000000;
+	border-color: #333333;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+	background: #111111;
+	border-color: #444444;
+}
+
+/*ボタン内側*/
+
+.openbtn .openbtn-area{
+    transition: all .4s;
+}
+
+/*activeクラスが付与されると
+線と周りのエリアが回転して×になる*/
+
+.openbtn.active .openbtn-area{
+	transform: rotateY(-360deg);
+}
+
+.openbtn.active span:nth-of-type(1) {
+    top: 14px;
+    left: 14px;
+    transform: translateY(5px) rotate(-135deg);
+    width: 30%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+	opacity: 0;
+}
+
+.openbtn.active span:nth-of-type(3){
+    top: 24px;
+    left: 14px;
+    transform: translateY(-5px) rotate(135deg);
+    width: 30%;
+}

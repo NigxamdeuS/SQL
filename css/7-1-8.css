@@ -1,0 +1,79 @@
+/*==================================================
+　7-1-8 背景が流れる（斜め）※ハンバーガーメニュー項目用
+===================================*/
+
+/*== ボタン共通設定 */
+#g-nav li a.btn {
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  border-radius: 0;
+  padding: 14px 30px;
+  text-align: center;
+  outline: none;
+  background: transparent;
+  font-weight: 500;
+  font-size: 1.02rem;
+  font-family: "Noto Sans JP", sans-serif;
+  letter-spacing: 0.02em;
+  transition: ease 0.2s;
+}
+
+/* ボタン内 span の形状 */
+#g-nav li a.btn span {
+  position: relative;
+  z-index: 3;
+  color: #333;
+}
+
+#g-nav li a.btn:hover span,
+#g-nav li a.btn.is-active span {
+  color: #fff;
+}
+
+/*== 背景が流れる（斜め） */
+#g-nav li a.bgskew::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  background: #333;
+  width: 120%;
+  height: 100%;
+  transform: skewX(-25deg);
+  z-index: 1;
+}
+
+/* hover / 選択時のアニメーション */
+#g-nav li a.bgskew:hover::before,
+#g-nav li a.bgskew.is-active::before {
+  animation: skewanime 0.5s forwards;
+}
+
+@keyframes skewanime {
+  100% {
+    left: -10%;
+  }
+}
+
+/* ----- ダーク：反転色 ----- */
+[data-theme="dark"] #g-nav li a.btn {
+  border-color: #555;
+}
+
+[data-theme="dark"] #g-nav li a.btn span {
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] #g-nav li a.btn:hover span,
+[data-theme="dark"] #g-nav li a.btn.is-active span {
+  color: #111;
+}
+
+[data-theme="dark"] #g-nav li a.bgskew::before {
+  background: #f5f5f5;
+}

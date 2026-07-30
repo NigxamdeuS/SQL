@@ -1,0 +1,136 @@
+/*========= ナビゲーションのためのCSS ===============*/
+
+/*アクティブになったエリア*/
+#g-nav.panelactive {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+/*丸の拡大*/
+.circle-bg {
+  position: fixed;
+  z-index: 3;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  transform: scale(0);
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  transition: all 0.6s;
+  pointer-events: none;
+}
+
+/* ダーク：白メニューの反転（黒背景） */
+[data-theme="dark"] .circle-bg {
+  background: #000000;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.circle-bg.circleactive {
+  transform: scale(50);
+}
+
+/*ナビゲーションの縦スクロール*/
+#g-nav-list {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#g-nav.panelactive #g-nav-list {
+  display: block;
+}
+
+/*ナビゲーション*/
+#g-nav ul {
+  opacity: 0;
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 8px 0;
+  width: min(92vw, 380px);
+}
+
+/*背景が出現後にナビゲーションを表示*/
+#g-nav.panelactive ul {
+  opacity: 1;
+}
+
+#g-nav.panelactive ul::before {
+  content: "MENU";
+  display: block;
+  text-align: center;
+  font-family: "Outfit", "Noto Sans JP", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #8e8e8e;
+  margin-bottom: 10px;
+}
+
+[data-theme="dark"] #g-nav.panelactive ul::before {
+  color: #8e8e8e;
+}
+
+/*背景が出現後にナビゲーション li を表示*/
+#g-nav.panelactive ul li {
+  animation-name: gnaviAnime;
+  animation-duration: 0.7s;
+  animation-delay: 0.15s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes gnaviAnime {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*リストのレイアウト設定*/
+#g-nav li {
+  text-align: center;
+  list-style: none;
+}
+
+#g-nav li + li {
+  border-top: 1px solid transparent;
+  margin-top: 8px;
+}
+
+[data-theme="dark"] #g-nav li + li {
+  border-top-color: transparent;
+}
+
+/* 7-1-8 に任せるため、旧ホバー背景は無効化 */
+#g-nav li a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#g-nav li a:hover,
+#g-nav li a.is-active {
+  background: transparent;
+}
+
+/* ヘッダー右側とボタンが重ならないように余白 */
+.header-right {
+  margin-right: 56px;
+}
